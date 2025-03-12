@@ -9,6 +9,7 @@ Route::get('/trang-moi', [PagesController::class, 'trangMoi']);
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::post('/', [LoginController::class, 'logout'])->name('logout');
 Route::get('/tim-kiem', [PagesController::class, 'timKiem'])->name('timkiem.sanpham');
+Route::get('/products', [PagesController::class, 'sort'])->name('products.index');
 Route::get('/detail/{id}', [PagesController::class, 'detail'])->name('sanpham.chitiet');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'processLogin'])->name('login.post');

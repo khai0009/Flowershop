@@ -40,14 +40,14 @@
             <!-- Giỏ hàng -->
             <a href="/cart" class="relative">
                 <div class="bg-gray-100 px-4 py-2 rounded-full text-lg hover:bg-pink-300 hover:text-white transition">
-                    <i class="fas fa-shopping-bag"></i> {{ $tongQuantity }} sản phẩm
+                    <i class="fas fa-shopping-bag"></i> {{ $tongQuantily }} sản phẩm
                 </div>
             </a>
         </div>
     </div>
 
     <!-- Mạng xã hội -->
-    <div class="container mx-auto mt-2 bg-fuchsia-200 flex justify-center space-x-4 text-3xl text-gray-700">
+    <div class="container mx-auto mt-2 bg-pink-200 flex justify-center space-x-4 text-3xl text-gray-700">
         <a href="#" class="hover:text-pink-500"><i class="fab fa-facebook"></i></a>
         <a href="#" class="hover:text-pink-500"><i class="fab fa-youtube"></i></a>
         <a href="#" class="hover:text-pink-500"><i class="fab fa-instagram"></i></a>
@@ -116,10 +116,47 @@
 <script>
     $(document).ready(function(){
         $('.slider').slick({
+            lidesToShow: 1,
+      
+            slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
             prevArrow: '<i class="fas fa-chevron-left slick-prev cursor-pointer absolute top-1/2 w-auto -mt-5.5 p-4 text-white font-bold text-lg transition-all duration-600 ease-linear rounded-r-md select-none hover:bg-black/80 z-10"></i>',
     nextArrow: '<i class="fas fa-chevron-right slick-next cursor-pointer absolute top-1/2 w-auto -mt-5.5 p-4 text-white font-bold text-lg transition-all duration-600 ease-linear rounded-r-md select-none right-0 rounded-l-md hover:bg-black/80"></i>'
         });
 });
+</script>
+<script>
+    document.getElementById('sortSelect').addEventListener('change', function() {
+        const sortValue = this.value;
+        const url = "{{ route('products.index') }}"; // Lấy URL route index sản phẩm
+
+        fetch(`${url}?sort=${sortValue}`, { // Gửi request AJAX GET
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest' // Báo hiệu đây là AJAX request (nếu cần trong controller)
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            const tempElement = document.createElement('div'); // Tạo element tạm để parse HTML trả về
+            tempElement.innerHTML = html;
+
+            const productListHTML = tempElement.querySelector('.product-list').innerHTML; // Line 251 (approximately) // Lấy HTML danh sách sản phẩm
+            const paginationHTML = tempElement.querySelector('.pagination').innerHTML; // Lấy HTML phân trang
+
+            document.getElementById('product-list-container').innerHTML = productListHTML; // Cập nhật khu vực sản phẩm
+            document.getElementById('pagination-container').innerHTML = paginationHTML; // Cập nhật phân trang
+
+            // Cập nhật URL trình duyệt (tùy chọn, nếu muốn URL thay đổi khi sắp xếp)
+            const newUrl = `${url}?sort=${sortValue}`;
+            window.history.pushState({path: newUrl}, '', newUrl);
+
+        })
+        .catch(error => {
+            console.error('Lỗi:', error);
+            alert('Có lỗi xảy ra khi sắp xếp sản phẩm.');
+        });
+    });
 </script>
 </body>
 </html>
