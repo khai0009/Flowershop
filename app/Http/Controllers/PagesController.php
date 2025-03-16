@@ -84,7 +84,11 @@ class PagesController extends Controller
         if (!$sanPham) {
             abort(404); // Hiển thị trang 404 nếu không tìm thấy sản phẩm
         }
+        $giaSanPham = $sanPham->gia; // Lấy giá của sản phẩm
 
-        return view('Home.detail', ['sanPham' => $sanPham],['tongQuantily' => $this->tongQuantily]);
+$duLieu = product::where('gia', '>=', $giaSanPham - 200)
+                    ->where('gia', '<=', $giaSanPham + 200)
+                    ->get();
+        return view('Home.detail', ['sanPham' => $sanPham],['duLieu' => $duLieu]);
     }
 }

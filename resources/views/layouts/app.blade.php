@@ -22,18 +22,24 @@
     </style>
 </head>
 <body>
-<header class="bg-pink-200 py-3 shadow-md">
+<header class="relative h-[300px] overflow-hidden bg-cover bg-[50%]" style="background-image: url('/pink_flower_4k.jpg');">
+  <div class="absolute inset-0 z-10 flex items-center justify-center">
+    <div class="text-center text-white border-5 border-white p-2 px-12 bg-black/20">
+      <h1 class="text-4xl font-bold">Beautifulflower</h1>
+      <i class="mt-[-0.5em]">Vườn hoa trong nhà bạn</i>
+    </div>
+  </div>
+  <div class="absolute inset-0 bg-gray-900 bg-cover bg-center blur-lg opacity-0" id="overlay"></div>
+</header>
+<section class="bg-pink-900 py-3 shadow-md" id="nav">
     <div class="container mx-auto px-4">
         <div class="md:hidden flex flex-col space-y-4">
             <div class="flex items-center justify-between">
-                <a href="/" class="flex-shrink-0">
-                    <img src="/Beautifulflower.jpg" alt="Logo" class="w-32">
-                </a>
                 
                 <div class="flex items-center space-x-2">
                     @auth
                         <div x-data="{ open: false }" class="relative">
-                            <button @click="open = !open" class="flex items-center bg-pink-300 p-1.5 rounded-lg text-sm text-white hover:bg-pink-400">
+                            <button @click="open = !open" class="flex items-center bg-pink-500 p-1.5 rounded-lg text-sm text-white hover:bg-pink-400">
                                 <img src="https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk" alt="Avatar" class="w-6 h-6 rounded-full mr-1">
                                 <span class="max-w-[80px] truncate">{{ Auth::user()->name }}</span>
                                 <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -48,12 +54,12 @@
                             </div>
                         </div>
                     @else
-                        <a href="/login" class="text-sm bg-gray-100 px-3 py-1.5 rounded-full hover:bg-pink-300 hover:text-white transition">
+                        <a href="/login" class="text-sm bg-gray-100 px-3 py-1.5 rounded-full hover:bg-pink-800 hover:text-white transition">
                             <i class="fas fa-sign-in-alt"></i>
                         </a>
                     @endauth
 
-                    <a href="/cart" class="relative bg-gray-100 px-3 py-1.5 rounded-full text-sm hover:bg-pink-300 hover:text-white transition">
+                    <a href="/cart" class="relative bg-gray-100 px-3 py-1.5 rounded-full text-sm hover:bg-pink-700 hover:text-white transition">
                         <i class="fas fa-shopping-bag"></i>
                         <span class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
                         @include('partials/cart_summary')
@@ -62,34 +68,34 @@
                 </div>
             </div>
 
-            <div class="text-xs space-y-1 text-gray-700">
-                <p><i class="fas fa-envelope text-pink-500"></i> beautifulflower@gmail.com</p>
-                <p><i class="fas fa-phone text-pink-500"></i> 0993745782</p>
-                <p class="text-xs"><i class="fas fa-clock text-pink-500"></i> T2-T6: 7h30-21h30 | T7: 7h30-20h30</p>
+            <div class="text-xs space-y-1 text-white">
+                <p><i class="fas fa-envelope text-white"></i> beautifulflower@gmail.com</p>
+                <p><i class="fas fa-phone text-white"></i> Hotline: 0993745782</p>
+                <p class="text-xs"><i class="fas fa-clock text-white"></i> T2-T6: 7h30-21h30 | T7: 7h30-20h30</p>
             </div>
         </div>
 
         <!-- Desktop Header -->
         <div class="hidden md:flex items-center justify-between">
-            <div class="flex flex-col space-y-2 text-sm text-gray-700">
-                <p><i class="fas fa-envelope text-pink-500"></i> beautifulflower@gmail.com</p>
-                <p><i class="fas fa-phone text-pink-500"></i> 0993745782</p>
-                <p><i class="fas fa-clock text-pink-500"></i> T2 - T6: 7h30 - 21h30 | T7: 7h30 - 20h30</p>
+            <!-- Contact Info -->
+            <div class="flex space-x-8 text-xl text-white">
+                <span><i class="fas fa-envelope"></i> beautifulflower@gmail.com</span>
+                <span><i class="fas fa-phone"></i> 0993745782</span>
+                <span><i class="fas fa-clock"></i> T2-T6: 7h30-21h30 | T7: 7h30-20h30</span>
             </div>
 
-            <a href="/" class="flex-shrink-0">
-                <img src="/Beautifulflower.jpg" alt="Logo" class="w-48">
-            </a>
-
+            <!-- User and Cart -->
             <div class="flex items-center space-x-4">
                 @auth
                     <div x-data="{ open: false }" class="relative">
-                        <button @click="open = !open" class="flex items-center bg-pink-300 p-2 rounded-lg text-white hover:bg-pink-400">
+                        <button @click="open = !open" class="flex items-center bg-pink-500 px-4 py-2 rounded-lg text-white hover:bg-pink-400">
                             <img src="https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk" alt="Avatar" class="w-8 h-8 rounded-full mr-2">
                             <span>{{ Auth::user()->name }}</span>
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
                         </button>
-                        <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                        <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
                             <a href="/profile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Thông tin tài khoản</a>
                             <a href="/settings" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cài đặt</a>
                             <form action="{{ route('logout') }}" method="POST">
@@ -99,68 +105,253 @@
                         </div>
                     </div>
                 @else
-                    <a href="/login" class="bg-gray-100 px-4 py-2 rounded-full hover:bg-pink-300 hover:text-white transition">
+                    <a href="/login" class="bg-gray-100 px-4 py-2 rounded-full hover:bg-pink-700 hover:text-white transition">
                         <i class="fas fa-sign-in-alt"></i> Đăng nhập
                     </a>
                 @endauth
 
-                <a href="/cart" class="relative hidden sm:block">
-                    <div class="bg-gray-100 px-4 py-2 rounded-full hover:bg-pink-300 hover:text-white transition">
-                        <i class="fas fa-shopping-bag"></i> @include('partials/cart_summary')
-                    </div>
+                <a href="/cart" class="bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-800 hover:bg-pink-700 hover:text-white">
+                    <i class="fas fa-shopping-bag"></i> Giỏ hàng
                 </a>
             </div>
         </div>
     </div>
-
+    
     <!-- Social Links -->
     <div class="container mx-auto mt-4 px-4">
         <div class="flex justify-center space-x-6 text-xl sm:text-2xl text-gray-700">
-            <a href="#" class="hover:text-pink-500 transition-colors"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover:text-pink-500  0 transition-colors"><i class="fab fa-facebook"></i></a>
             <a href="#" class="hover:text-pink-500 transition-colors"><i class="fab fa-youtube"></i></a>
             <a href="#" class="hover:text-pink-500 transition-colors"><i class="fab fa-instagram"></i></a>
         </div>
     </div>
-</header>
+    </section>
 
 <div id="content">
     @yield('content')
 </div>
 
-<footer class="bg-gray-100 py-8">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="space-y-2">
-                <h3 class="text-lg font-semibold mb-4">Liên hệ</h3>
-                <p class="text-sm">Địa chỉ: 123 Đường ABC,Phường MNL, Quận XYZ, TP.HCM</p>
-                <p class="text-sm">Điện thoại: 0123 456 789</p>
-                <p class="text-sm">Email: info@Beautifulflower.com</p>
-            </div>
-            <div class="space-y-2">
-                <h3 class="text-lg font-semibold mb-4">Liên kết nhanh</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-sm hover:text-pink-500 transition-colors">Trang chủ</a></li>
-                    <li><a href="#" class="text-sm hover:text-pink-500 transition-colors">Sản phẩm</a></li>
-                    <li><a href="#" class="text-sm hover:text-pink-500 transition-colors">Giới thiệu</a></li>
-                    <li><a href="#" class="text-sm hover:text-pink-500 transition-colors">Liên hệ</a></li>
-                </ul>
-            </div>
-            <div class="space-y-2">
-                <h3 class="text-lg font-semibold mb-4">Mạng xã hội</h3>
-                <div class="flex flex-col space-y-2">
-                    <a href="#" class="text-sm hover:text-pink-500 transition-colors"><i class="fab fa-tiktok w-6"></i> Tiktok</a>
-                    <a href="#" class="text-sm hover:text-pink-500 transition-colors"><i class="fab fa-facebook w-6"></i> Facebook</a>
-                    <a href="#" class="text-sm hover:text-pink-500 transition-colors"><i class="fab fa-instagram w-6"></i> Instagram</a>
-                    <a href="#" class="text-sm hover:text-pink-500 transition-colors"><i class="fab fa-twitter w-6"></i> Twitter</a>
-                </div>
-            </div>
+<footer class="bg-pink-900">
+  <div class="max-w-screen-xl px-4 pt-16 pb-6 mx-auto sm:px-6 lg:px-8 lg:pt-24">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div>
+        <div class="flex justify-center text-pink-300 sm:justify-start ">
+          <svg
+            class="h-8 w-64 p-0"
+            viewBox="0 0 118 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <text x="0" y="20" fill="currentColor" font-size="20" font-weight="bold">Beautifulflower</text>
+          </svg>
+          <span class="ml-2 text-pink-300">2025</span>
         </div>
-        <div class="mt-8 text-center">
-            <p class="text-sm text-gray-600">&copy; 2025 Flower Shop. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
 
+        <p class="max-w-md mx-auto mt-6 leading-relaxed text-center text-gray-400 sm:max-w-xs sm:mx-0 sm:text-left">
+          Chào mừng đến với trang web của chúng tôi. Chúng tôi cung cấp những bông hoa đẹp nhất.
+        </p>
+
+        <ul class="flex justify-center gap-6 mt-8 md:gap-8 sm:justify-start">
+          <li>
+            <a href="/" rel="noopener noreferrer" target="_blank" class="text-pink-500 transition hover:text-pink-500/75">
+              <span class="sr-only">Facebook</span>
+              <i class="fab fa-facebook-f w-6 h-6"></i>
+            </a>
+          </li>
+
+          <li>
+            <a href="/" rel="noopener noreferrer" target="_blank" class="text-pink-500 transition hover:text-pink-500/75">
+              <span class="sr-only">Instagram</span>
+              <i class="fab fa-instagram w-6 h-6"></i>
+            </a>
+          </li>
+
+          <li>
+            <a href="/" rel="noopener noreferrer" target="_blank" class="text-pink-500 transition hover:text-pink-500/75">
+              <span class="sr-only">Twitter</span>
+              <i class="fab fa-twitter w-6 h-6"></i>
+            </a>
+          </li>
+
+          <li>
+            <a href="/" rel="noopener noreferrer" target="_blank" class="text-pink-500 transition hover:text-pink-500/75">
+              <span class="sr-only">GitHub</span>
+              <i class="fab fa-github w-6 h-6"></i>
+            </a>
+          </li>
+
+          <li>
+            <a href="/" rel="noopener noreferrer" target="_blank" class="text-pink-500 transition hover:text-pink-500/75">
+              <span class="sr-only">Dribbble</span>
+              <i class="fab fa-dribbble w-6 h-6"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 md:grid-cols-4">
+        <div class="text-center sm:text-left">
+          <p class="text-lg font-medium text-white">Về chúng tôi</p>
+
+          <nav class="mt-8">
+            <ul class="space-y-4 text-sm">
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Lịch sử công ty
+                </a>
+              </li>
+
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Gặp gỡ đội ngũ
+                </a>
+              </li>
+
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Sổ tay nhân viên
+                </a>
+              </li>
+
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Tuyển dụng
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="text-center sm:text-left">
+          <p class="text-lg font-medium text-white">Dịch vụ của chúng tôi</p>
+
+          <nav class="mt-8">
+            <ul class="space-y-4 text-sm">
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Bán hoa tươi
+                </a>
+              </li>
+
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Thiết kế hoa
+                </a>
+              </li>
+
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Giao hoa tận nơi
+                </a>
+              </li>
+
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Tư vấn hoa
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="text-center sm:text-left">
+          <p class="text-lg font-medium text-white">Liên kết hữu ích</p>
+
+          <nav class="mt-8">
+            <ul class="space-y-4 text-sm">
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Câu hỏi thường gặp
+                </a>
+              </li>
+
+              <li>
+                <a class="text-white transition hover:text-white/75" href="/">
+                  Hỗ trợ
+                </a>
+              </li>
+
+              <li>
+                <a class="flex group justify-center sm:justify-start gap-1.5" href="/">
+                  <span class="text-white transition group-hover:text-white/75">
+                    Trò chuyện trực tiếp
+                  </span>
+
+                  <span class="relative flex w-2 h-2 -mr-2">
+                    <span class="absolute inline-flex w-full h-full bg-pink-400 rounded-full opacity-75 animate-ping"></span>
+                    <span class="relative inline-flex w-2 h-2 bg-pink-500 rounded-full"></span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="text-center sm:text-left">
+          <p class="text-lg font-medium text-white">Liên hệ với chúng tôi</p>
+
+          <ul class="mt-8 space-y-4 text-sm">
+            <li>
+              <a class="flex items-center justify-center sm:justify-start gap-1.5 group" href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+
+                <span class="text-white transition group-hover:text-white/75">
+                  info@beautifulflower.com
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="flex items-center justify-center sm:justify-start gap-1.5 group" href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a 1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+
+                <span class="text-white transition group-hover:text-white/75">
+                  +1 555 123 4567
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a class="flex items-center justify-center sm:justify-start gap-1.5 group" href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+
+                <span class="text-white transition group-hover:text-white/75">
+                  123 Đường Hoa, Thành phố
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-6 mt-12 border-t border-pink-700">
+      <div class="text-center sm:flex sm:justify-between sm:text-left">
+        <p class="text-sm text-gray-400">
+          <span class="block sm:inline">© 2025 Beautifulflower.</span>
+          <span class="block sm:inline">All rights reserved.</span>
+        </p>
+
+        <ul class="flex justify-center mt-4 space-x-4 text-sm sm:mt-0">
+          <li>
+            <a class="text-gray-400 transition hover:text-gray-400/75" href="/"> Terms & Conditions </a>
+          </li>
+
+          <li>
+            <a class="text-gray-400 transition hover:text-gray-400/75" href="/"> Privacy Policy </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
 <script src="//unpkg.com/alpinejs" defer></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -184,7 +375,59 @@
                 }
             ]
         });
+        $('.slidercart').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,  
+            autoplay: true,
+            autoplaySpeed: 2000,
+            prevArrow: '<i class="fas fa-chevron-left slick-prev cursor-pointer absolute top-1/2 w-auto -mt-5.5 p-4 text-white font-bold text-lg transition-all duration-600 ease-linear rounded-r-md select-none hover:bg-black/80 z-10"></i>',
+            nextArrow: '<i class="fas fa-chevron-right slick-next cursor-pointer absolute top-1/2 w-auto -mt-5.5 p-4 text-white font-bold text-lg transition-all duration-600 ease-linear rounded-r-md select-none right-0 rounded-l-md hover:bg-black/80"></i>',
+            responsive: [
+                {
+                    breakpoint: 640,
+                    settings: {
+                        arrows: false,
+                        dots: false
+                    }
+                }
+            ]
+        });
     });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const content = document.querySelector('header .absolute');
+  const overlay = document.getElementById('overlay');
+  const nav = document.getElementById('nav');
+  let wHeight = window.innerHeight;
+
+  window.addEventListener('resize', function() {
+    wHeight = window.innerHeight;
+  });
+
+  function update() {
+    const currentScrollY = window.scrollY;
+
+    const slowScroll = currentScrollY / 2;
+    const blurScroll = currentScrollY * 2;
+    const opaScroll = 1.4 - currentScrollY / 400;
+
+    if (currentScrollY > wHeight) {
+      nav.classList.add('fixed-nav');
+    } else {
+      nav.classList.remove('fixed-nav');
+    }
+
+    content.style.transform = `translateY(${slowScroll}px)`;
+    content.style.opacity = opaScroll;
+
+    overlay.style.opacity = blurScroll / wHeight;
+  }
+
+  window.addEventListener('scroll', update);
+
+  overlay.style.backgroundImage = window.getComputedStyle(document.querySelector('header')).backgroundImage;
+});
 </script>
 </body>
 </html>

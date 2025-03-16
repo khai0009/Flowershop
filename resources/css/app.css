@@ -11,3 +11,29 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+@layer base {
+  body {
+    @apply font-sans m-0 p-0 box-border;
+  }
+  h3 {
+    @apply font-serif text-3xl font-light text-center;
+  }
+  a {
+    @apply no-underline text-black font-medium transition-all border-b border-transparent mb-2 inline-flex hover:border-black;
+  }
+  ul {
+    @apply list-none p-0;
+  }
+  button {
+    @apply appearance-none border-0 bg-transparent;
+  }
+  input {
+    @apply py-3 border-none bg-transparent font-medium  focus:outline-none w-full text-lg font-bold placeholder-black;
+  }
+  @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@300&family=Rubik:wght@400;500;700&display=swap");
+}
+
+:root {
+  --light: #ffffff;
+  --dark: #000;
+}
