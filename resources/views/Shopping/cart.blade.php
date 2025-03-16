@@ -1,6 +1,8 @@
-<html lang="vn">
-    <x-header title="Giỏ hàng"/>
-    <body>
+@extends('layouts.app')
+
+@section('title', 'Giỏ hàng')
+
+@section('content')
     <div class="flex justify-center p-1">
     <div class="h-full p-4 w-full">
         <h1 class="text-3xl font-bold mb-6 text-pink-600 z-1">Giỏ hàng</h1>
@@ -63,5 +65,4 @@
     </div>
 </div>
 <script src="{{ asset('js/address.js') }}" defer></script>
-    </body>
-</html>
+@endsection

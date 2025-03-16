@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
+<head>
 <x-header title="đăng nhập"/>
+</head>
+
 <body class="bg-pink-100">
     <div class="flex items-center justify-center min-h-screen">
         <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow">

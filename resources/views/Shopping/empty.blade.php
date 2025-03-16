@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html lang="vi">
-    <x-header title="Giỏ hàng trống"/>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Giỏ hàng trống')
+
+@section('content')
 
 
 <div class="h-full p-4 center flex items-center justify-center  w-full ">
@@ -25,6 +26,4 @@
           </div>
         </div>
 
-
-</body>
-</html>
+        @endsection

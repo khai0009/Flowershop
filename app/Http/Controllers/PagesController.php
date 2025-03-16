@@ -10,7 +10,9 @@ use Cloudinary\Cloudinary;
 class PagesController extends Controller
 {   
     private $tongQuantily = 0;
-
+    public function list(){
+        return View('Admin.List');
+    }
     
     public function trangMoi(): View
     {
@@ -30,13 +32,14 @@ class PagesController extends Controller
             $duLieu->orderBy('created_at', 'desc');
         }
 
-        $duLieu = $duLieu->paginate(30);
-   
-        if ($request->ajax()) { // Kiểm tra nếu là AJAX request
-            return View::make('Home.products', ['duLieu' => $duLieu],['tongQuantily' => $this->tongQuantily])->render(); // Trả về partial view đã render
-        } else {
-            return view('Home.index', compact('duLieu'),['tongQuantily' => $this->tongQuantily]); // Trả về view đầy đủ cho request thông thường
-        }
+        $duLieu = $duLieu->paginate(30)->appends(['sort' => $sortOrder]); // Thêm sort vào query string của phân trang
+
+        $data = [
+            'duLieu' => $duLieu,
+            'tongQuantily' => $this->tongQuantily, // Đảm bảo $this->tongQuantily được định nghĩa
+        ];
+
+        return view('Home.index', $data); // Trả về view đầy đủ
     }
     public function index(): View
     {   
@@ -82,6 +85,6 @@ class PagesController extends Controller
             abort(404); // Hiển thị trang 404 nếu không tìm thấy sản phẩm
         }
 
-        return view('Home.detail', ['sanPham' => $sanPham],compact('tongQuantily'));
+        return view('Home.detail', ['sanPham' => $sanPham],['tongQuantily' => $this->tongQuantily]);
     }
 }
