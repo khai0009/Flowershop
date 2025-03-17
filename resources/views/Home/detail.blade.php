@@ -197,7 +197,7 @@
 </div>
 <div class="relative w-full flex justify-center mt-4 md:mt-8">
     <div class="slidercart w-full md:w-[80%] lg:w-[65%] mx-auto rounded-lg shadow-lg">
-        @foreach ($duLieu as $flower)
+        @foreach ($products as $flower)
             <a class="product-tiles-grid-item js-ga-track" href="{{ route('sanpham.chitiet', ['id' => $flower->id]) }}" data-style-id="{{ $flower->id }}" dt-dtname="Product Details Page" id="{{ $flower->id }}" data-position="{{ $loop->index }}" data-list-name="ProductGrid" data-category-path="Flowers" aria-label="{{ $flower->tenhoa }}" data-list-page="/flowers">
                 <div class="product-tiles-grid-item-image-wrapper">
                     <div class="product-tiles-grid-item-image">

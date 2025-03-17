@@ -44,10 +44,10 @@ class LoginController extends Controller
         if ($request->isMethod("post")) {
          
             $request->validate([
-        
+                'name' => 'required|max:255',
                 'email' => 'required|string|email|max:255',
                 'mk' => 'required|string|min:8',
-                'sdt' => 'required|string',
+                'sdt' => 'required|string|max:10',
                 'diachi' => 'required|string',
                 'city' => 'required|string',
                 'district' => 'required|string',
@@ -55,9 +55,9 @@ class LoginController extends Controller
             ]);
             
            try {
-                $user = new User();
+     
                 User::create([
-                    'name' => $request->input('sdt'),
+                    'name' => $request->input('name'),
                     'email' => $request->input('email'),
                     'password' => Hash::make($request->input('mk')),
                     'sdt' => $request->input('sdt'),

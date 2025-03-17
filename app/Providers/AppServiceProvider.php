@@ -22,5 +22,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
 {
     Facades\View::composer('partials.cart_summary', \App\View\Composers\CartComposer::class);
+    Facades\View::composer('partials.cart_sum', \App\View\Composers\CartComposer::class);
 }
 }

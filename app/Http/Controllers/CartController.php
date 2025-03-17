@@ -6,6 +6,7 @@ use App\Models\product;
 use App\Models\Check;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CartController extends Controller
 {   
@@ -39,7 +40,7 @@ class CartController extends Controller
                 ->where('cart_id', $Check->Mahd)
                 ->with('product')
                 ->get();
-    
+            
             return view('Shopping.cart', compact('cartItems', 'Check'));
         } else {
             return view('Shopping.empty'); // Chuyển sang empty nếu chưa đăng nhập
@@ -94,7 +95,7 @@ class CartController extends Controller
                 'cart_id'  => $Check->Mahd,
                 'product_id' => $request->input('product_id'),
                 'price'=> $request->input('product_price'),
-                'quantity' => 1,
+                'quantilylocal' => 1,
             ]);
 
             return redirect()->route('cart'); // Chuyển sang shopping.cart
@@ -156,51 +157,83 @@ class CartController extends Controller
 
     
     }
+    public function qr($totalPrice,$orderid){
+        $momoInfo = [
+            'acId' => env('MOMO_ACCOUNTID'), // Thay thế bằng ID tài khoản MoMo của bạn
+            'acName' => env('MOMO_ACCOUNTNAME'), // Thay thế bằng tên tài khoản MoMo của bạn
+            'amount' => $totalPrice,
+            'memo' => 'Thanh toan don hang #' . $orderid,
+        ];
+
+        $momoUrl = 'momo://qr?data=' . urlencode(json_encode($momoInfo));
+
+        $qrCode = QrCode::size(200)->generate($momoUrl);
+
+        // Hiển thị mã QR cho người dùng
+        return view('Shopping.momo_qr', [
+            'qrCode' => $qrCode,
+            'totalPrice' => $totalPrice,
+            'orderId' => $orderid,
+        ]);
+    }
     public function checkout(Request $request)
 {   
+   
     $Check = Check::where('user_id', Auth::id())
                 ->where('Thanhtoan', 0)
                 ->first();
                 
                 
+                
     $user = Auth::user();
+  
     $cart = cart::where('user_id', $user->id)->where('cart_id', $Check->Mahd)
         ->get();
         foreach ($cart as $cartItem) {
             $product = Product::find($cartItem->product_id);
-            if ($product->quantily < $cartItem->quantilylocal) {
+           
+            if ($product->soluong < $cartItem->quantilylocal) {
                 return redirect()->route('cart')->with('error', 'Số lượng sản phẩm ' . $product->name . ' không đủ hoặc không khả dụng. Vui lòng kiểm tra lại giỏ hàng của bạn.');
             }
         }
+    
     $totalPrice = $cart->sum(fn($item) => $item->price * $item->quantilylocal);
 
+        
     // Xác định địa chỉ giao hàng đầy đủ
+    
     $checkoutAddress = match ($request->input('deliveryMethod')) {
-        'tại nhà' => $user->diachi . ', ' . $user->phuongxa  . ', ' . $user->quanhuyen . ', ' . $user->thanhpho,
-        'tại cửa hàng' => '123 Đường ABC, Phường MNL, Quận XYZ, TP.HCM',
-        default => $request->input('address') 
-    } . ', ' . match ($request->input('deliveryMethod')) {
         'tại nhà' => $user->phuongxa . ', ' . $user->quanhuyen . ', ' . $user->selectedCity,
         'tại cửa hàng' => 'Phường MNL, Quận XYZ, TP.HCM',
-        default => $request->input('ward') . ', ' . $request->input('selectedDistrict') . ', ' . $request->input('selectedCity')
+        default =>$request->input('address') .','. $request->input('ward') . ', ' . $request->input('selectedDistrict') . ', ' . $request->input('selectedCity')
     };
-Check::where('Mahd', $Check->Mahd)
-    ->where('user_id', $user->id)
-    ->where('Thanhtoan',0)
-    ->update([
-        'Thanhtoan' => 1, // 0: chưa thanh toán, 1: đã thanh toán
-        'Tongcong' => $totalPrice,
-        'Pttt' => $request->input('paymentMethod'),
-        'Diachi' => $checkoutAddress,
-        'Ngaygiao' => Carbon::parse($request->input('deliveryTime')),
-        'updated_at' => now(), // Cập nhật updated_at
-    ]);
-    foreach ($cart as $cartItem) {
-        $product = Product::find($cartItem->product_id);
-        $product->quantily -= $cartItem->quantilylocal;
-        $product->save();
+   
+    if ($request->input('paymentMethod') === 'chuyển khoản') {
+        return $this->qr($totalPrice, $Check->Mahd);
     }
+    else {
+        Check::where('Mahd', $Check->Mahd)
+            ->where('user_id', $user->id)
+            ->where('Thanhtoan',0)
+            ->update([
+                'Thanhtoan' => 1, // 0: chưa thanh toán, 1: đã thanh toán
+                'Tongcong' => $totalPrice,
+                'Pttt' => $request->input('paymentMethod'),
+                'Diachi' => $checkoutAddress,
+                'Ngaygiao' => Carbon::parse($request->input('deliveryTime')),
+                'updated_at' => now(), // Cập nhật updated_at
+            ]);
+        foreach ($cart as $cartItem) {
+            $product = Product::find($cartItem->product_id);
+            $product->soluong -= $cartItem->quantilylocal;
+            $product->save();
+        }
+    }
+
+ 
+
     return redirect()->route('index')->with('success', 'Thanh toán thành công!');
+
 }
 
 }?>

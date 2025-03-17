@@ -9,9 +9,19 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100&family=Roboto:ital,wght@0,100..900;1,100..900&family=Trocchi&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     <style>
+      body {
+        font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
         .slick-prev:before,
         .slick-next:before {
             color: white !important; /* Ensure arrow color is white */
@@ -33,59 +43,20 @@
 </header>
 <section class="bg-pink-900 py-3 shadow-md" id="nav">
     <div class="container mx-auto px-4">
-        <div class="md:hidden flex flex-col space-y-4">
-            <div class="flex items-center justify-between">
-                
-                <div class="flex items-center space-x-2">
-                    @auth
-                        <div x-data="{ open: false }" class="relative">
-                            <button @click="open = !open" class="flex items-center bg-pink-500 p-1.5 rounded-lg text-sm text-white hover:bg-pink-400">
-                                <img src="https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk" alt="Avatar" class="w-6 h-6 rounded-full mr-1">
-                                <span class="max-w-[80px] truncate">{{ Auth::user()->name }}</span>
-                                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </button>
-                            <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                                <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Thông tin tài khoản</a>
-                                <a href="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cài đặt</a>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Đăng xuất</button>
-                                </form>
-                            </div>
-                        </div>
-                    @else
-                        <a href="/login" class="text-sm bg-gray-100 px-3 py-1.5 rounded-full hover:bg-pink-800 hover:text-white transition">
-                            <i class="fas fa-sign-in-alt"></i>
-                        </a>
-                    @endauth
+        <div class="flex  items-center justify-between w-full">
 
-                    <a href="/cart" class="relative bg-gray-100 px-3 py-1.5 rounded-full text-sm hover:bg-pink-700 hover:text-white transition">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                        @include('partials/cart_summary')
-                        </span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="text-xs space-y-1 text-white">
-                <p><i class="fas fa-envelope text-white"></i> beautifulflower@gmail.com</p>
-                <p><i class="fas fa-phone text-white"></i> Hotline: 0993745782</p>
-                <p class="text-xs"><i class="fas fa-clock text-white"></i> T2-T6: 7h30-21h30 | T7: 7h30-20h30</p>
-            </div>
-        </div>
 
         <!-- Desktop Header -->
-        <div class="hidden md:flex items-center justify-between">
+        <div class=" flex flex-row items-center justify-between w-full">
             <!-- Contact Info -->
-            <div class="flex space-x-8 text-xl text-white">
+            <div class="flex flex-col md:flex-row space-x-8 md:text-xl text-xs text-white">
                 <span><i class="fas fa-envelope"></i> beautifulflower@gmail.com</span>
                 <span><i class="fas fa-phone"></i> 0993745782</span>
                 <span><i class="fas fa-clock"></i> T2-T6: 7h30-21h30 | T7: 7h30-20h30</span>
             </div>
 
             <!-- User and Cart -->
-            <div class="flex items-center space-x-4">
+            <div class="flex  flex-col md:flex-row items-center space-x-4">
                 @auth
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" class="flex items-center bg-pink-500 px-4 py-2 rounded-lg text-white hover:bg-pink-400">
@@ -105,14 +76,17 @@
                         </div>
                     </div>
                 @else
-                    <a href="/login" class="bg-gray-100 px-4 py-2 rounded-full hover:bg-pink-700 hover:text-white transition">
-                        <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                    <a href="/login" class="bg-gray-100 px-4 py-2 rounded-3xl hover:bg-pink-700 hover:text-white transition">
+                        <i class="fas fa-sign-in-alt"></i>
                     </a>
                 @endauth
 
-                <a href="/cart" class="bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-800 hover:bg-pink-700 hover:text-white">
-                    <i class="fas fa-shopping-bag"></i> Giỏ hàng
-                </a>
+                <a href="/cart" class="relative bg-gray-100 px-3 py-1.5 rounded-full text-sm hover:bg-pink-700 hover:text-white transition">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+                        @include('partials/cart_summary')
+                        </span>
+                    </a>
             </div>
         </div>
     </div>

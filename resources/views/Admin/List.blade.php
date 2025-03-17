@@ -9,23 +9,51 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="bg-gray-100 font-sans">
-    <div class="container mx-auto max-w-4xl py-8 bg-white rounded-lg shadow-md">
-        <h1 class="text-center text-3xl font-bold text-gray-800 mb-6">Danh sách các mục quản lý</h1>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div class="bg-white rounded-md shadow-sm p-4 hover:shadow-lg transition duration-200 ease-in-out">
-                <a href="{{route('Admin.index')}}" target="_blank" class="flex flex-col items-center text-gray-700">
-                <i class="fa-solid fa-square-poll-horizontal text-4xl mb-2 text-blue-500"></i>
-                    <span class="font-semibold">Danh sách sản phẩm</span>
-                </a>
-            </div>
-            <div class="bg-white rounded-md shadow-sm p-4 hover:shadow-lg transition duration-200 ease-in-out">
-                <a href="{{route('invoices.index')}}" target="_blank" class="flex flex-col items-center text-gray-700">
-                    <i  class="fa-solid fa-list-check text-4xl mb-2 text-red-500"></i>
-                    <span class="font-semibold">Danh sách hóa đơn</span>
-                </a>
-            </div>
-           
-            </div>
-    </div>
+<nav class="fixed left-0 z-50 flex flex-col justify-around h-screen bg-[#422C73]">
+    <a href="#first" class="text-4xl text-white p-5 text-center"><i class="far fa-user"></i></a>
+    <a href="#second" class="text-4xl text-white p-5 text-center"><i class="fas fa-briefcase"></i></a>
+    <a href="#third" class="text-4xl text-white p-5 text-center"><i class="far fa-file"></i></a>
+    <a href="#fourth" class="text-4xl text-white p-5 text-center"><i class="far fa-address-card"></i></a>
+</nav>
+
+<div class="bg-[#191919] min-h-screen font-sans">
+    <section id="first" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#D96AA7]">
+    
+    </section>
+
+    <section id="second" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#88BFB5]">
+    <iframe src="{{route('Admin.index')}}" width="1000" height="900"></iframe>
+    </section>
+
+    <section id="third" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#F2E527]">
+    <iframe src="{{route('invoices.index')}}" width="1000" height="900"></iframe>
+    </section>
+
+    <section id="fourth" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#D2A9D9]">
+        <h1 class="text-white text-5xl uppercase opacity-0">Fourth</h1>
+    </section>
+</div>
+
+<style>
+    section:target {
+        opacity: 1;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    section:target h1 {
+        opacity: 0;
+        animation: 2s fadeIn forwards .5s;
+    }
+
+    @keyframes fadeIn {
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
 </body>
 </html>

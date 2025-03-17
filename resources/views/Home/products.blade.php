@@ -53,7 +53,7 @@
 }
 </style>
 
-@foreach ($duLieu as $flower)
+@foreach ($products as $flower)
     <a class="product-tiles-grid-item js-ga-track" href="{{ route('sanpham.chitiet', ['id' => $flower->id]) }}" data-style-id="{{ $flower->id }}" dt-dtname="Product Details Page" id="{{ $flower->id }}" data-position="{{ $loop->index }}" data-list-name="ProductGrid" data-category-path="Flowers" aria-label="{{ $flower->tenhoa }}" data-list-page="/flowers">
         <div class="product-tiles-grid-item-image-wrapper">
             <div class="product-tiles-grid-item-image">
@@ -91,4 +91,5 @@
             </div>
         </div>
     </a>
+    
 @endforeach

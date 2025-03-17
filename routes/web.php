@@ -24,6 +24,7 @@ Route::get('/List', [PagesController::class, 'List'])->name('Admin.list');
 
 // Authenticated Routes (Requires Login)
 Route::middleware('auth')->group(function () {
+    Route::get('/qr_momo', [CartController::class, 'qr'])->name('qr_momo');
     Route::get('/cart', [CartController::class, 'Checkcart'])->name('cart');
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
     Route::post('/buy-now', [CartController::class, 'buyNow'])->name('buy.now');

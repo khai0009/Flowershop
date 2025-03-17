@@ -107,9 +107,9 @@
 
         <!-- Pagination -->
         <div class="mt-8" id="pagination-container">
-            @if($duLieu instanceof \Illuminate\Pagination\LengthAwarePaginator)
+            @if($products instanceof \Illuminate\Pagination\LengthAwarePaginator)
                 <div class="flex justify-center">
-                    {{ $duLieu->appends(request()->query())->links() }}
+                    {{ $products->appends(request()->query())->links('vendor.pagination.custom') }}
                 </div>
             @endif
         </div>
