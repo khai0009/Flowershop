@@ -10,27 +10,23 @@
 </head>
 <body class="bg-gray-100 font-sans">
 <nav class="fixed left-0 z-50 flex flex-col justify-around h-screen bg-[#422C73]">
-    <a href="#first" class="text-4xl text-white p-5 text-center"><i class="far fa-user"></i></a>
     <a href="#second" class="text-4xl text-white p-5 text-center"><i class="fas fa-briefcase"></i></a>
     <a href="#third" class="text-4xl text-white p-5 text-center"><i class="far fa-file"></i></a>
     <a href="#fourth" class="text-4xl text-white p-5 text-center"><i class="far fa-address-card"></i></a>
 </nav>
 
 <div class="bg-[#191919] min-h-screen font-sans">
-    <section id="first" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#D96AA7]">
-    
-    </section>
 
     <section id="second" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#88BFB5]">
-    <iframe src="{{route('Admin.index')}}" width="1000" height="900"></iframe>
+    <iframe src="{{route('Admin.index')}}" width="1100" height="800"></iframe>
     </section>
 
     <section id="third" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#F2E527]">
-    <iframe src="{{route('invoices.index')}}" width="1000" height="900"></iframe>
+    <iframe src="{{route('invoices.index')}}" width="1100" height="800"></iframe>
     </section>
 
     <section id="fourth" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#D2A9D9]">
-        <h1 class="text-white text-5xl uppercase opacity-0">Fourth</h1>
+    <iframe src="{{route('users.index')}}" width="1100" height="800"></iframe>
     </section>
 </div>
 

@@ -116,6 +116,7 @@
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
       <div>
         <div class="flex justify-center text-pink-300 sm:justify-start ">
+        
           <svg
             class="h-8 w-64 p-0"
             viewBox="0 0 118 24"

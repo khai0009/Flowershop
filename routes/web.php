@@ -6,6 +6,19 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
+
+Route::get('/profile', [UserController::class, 'show'])->name('profile');
+Route::get('/update-profile', [UserController::class, 'edit'])->name('update.profile');
+Route::post('/update-profile', [UserController::class, 'update'])->name('update.profile.post');
+
+Route::get('/update-password', [UserController::class, 'changePassword'])->name('update.password');
+Route::post('/update-password', [UserController::class, 'updatePassword'])->name('update.password.post');
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'showadmin'])->name('users.show');
+
 
 // Public Routes
 Route::get('/', [PagesController::class, 'index'])->name('index');
@@ -20,6 +33,10 @@ Route::post('/login', [LoginController::class, 'processLogin'])->name('login.pos
 Route::get('/register', [LoginController::class, 'Register'])->name('address.index'); // Corrected name consistency
 Route::post('/register', [LoginController::class, 'Register'])->name('address.store');
 Route::post('/', [LoginController::class, 'logout'])->name('logout');
+Route::get('/checkemail', [LoginController::class, 'showcheckemail'])->name('checkemail');
+Route::post('/checkemail', [LoginController::class, 'checkemail'])->name('checkemail.process');
+Route::get('/forget', [LoginController::class, 'forget'])->name('Login.forget');
+Route::post('/forget', [LoginController::class, 'resetpassword'])->name('resetpassword');
 Route::get('/List', [PagesController::class, 'List'])->name('Admin.list');
 
 // Authenticated Routes (Requires Login)

@@ -42,10 +42,9 @@ class LoginController extends Controller
     }
     public function Register(Request $request) {
         if ($request->isMethod("post")) {
-         
             $request->validate([
                 'name' => 'required|max:255',
-                'email' => 'required|string|email|max:255',
+                'email' => 'required|string|max:255',
                 'mk' => 'required|string|min:8',
                 'sdt' => 'required|string|max:10',
                 'diachi' => 'required|string',
@@ -75,4 +74,31 @@ class LoginController extends Controller
         }
         return view('Login.register');
     }
+    public function showcheckemail(){
+
+        return View('Login.checkemail');
+    }
+    public function checkemail(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email'
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (!$user) {
+        return redirect()->back()->with('error', 'Email không tồn tại trong hệ thống.');
+    }
+    session(['email' => $request->email]);
+    return redirect()->route('Login.forget');
+} public function forget(){
+    return View('Login.forget');
+}
+public function resetpassword(Request $request){
+    User::where('email', $request->email)->update([
+        'password' => Hash::make($request->input('password'))
+    ]);
+    
+    return View('Login.login');
+}
 }
