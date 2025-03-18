@@ -11,9 +11,14 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100&family=Roboto:ital,wght@0,100..900;1,100..900&family=Trocchi&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100&family=DM+Serif+Text:ital@0;1&family=Roboto&family=Trocchi&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     <style>
+      .dm-serif-text-regular-italic {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: italic;
+}
       body {
         font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
@@ -50,6 +55,7 @@
         <div class=" flex flex-row items-center justify-between w-full">
             <!-- Contact Info -->
             <div class="flex flex-col md:flex-row space-x-8 md:text-xl text-xs text-white">
+                <a href="/" class="flex flex-row text-pink-300 dm-serif-text-regular-italic"><img src="/favicon.ico" width="20" height="20" /> BEATIFULFLOWER </a>
                 <span><i class="fas fa-envelope"></i> beautifulflower@gmail.com</span>
                 <span><i class="fas fa-phone"></i> 0993745782</span>
                 <span><i class="fas fa-clock"></i> T2-T6: 7h30-21h30 | T7: 7h30-20h30</span>
@@ -76,8 +82,8 @@
                         </div>
                     </div>
                 @else
-                    <a href="/login" class="bg-gray-100 px-4 py-2 rounded-3xl hover:bg-pink-700 hover:text-white transition">
-                        <i class="fas fa-sign-in-alt"></i>
+                    <a href="/login" class="flex justify-center bg-gray-100 px-4 py-2 rounded-3xl hover:bg-pink-700 hover:text-white transition">
+                        <i class="fas fa-sign-in-alt m-auto mr-2"></i> Đăng nhập
                     </a>
                 @endauth
 
