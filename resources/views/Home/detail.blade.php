@@ -68,7 +68,7 @@
                             </button>
                             <input type="hidden" name="product_id" value="{{ $sanPham->id }}">
                             <input type="hidden" name="product_price" value="{{ $sanPham->gia }}">
-                            <input type="hidden" name="quantity" x-ref="quantity" value="1"> {{-- Giá trị quantity sẽ được cập nhật bởi script --}}
+                            <input type="hidden" name="quantity" x-ref="quantity" value="1"> 
                         </form>
                     </div>
 
@@ -80,7 +80,7 @@
 
     
 </div>
-<div class="bg-gray-100 text-gray-800 font-sans my-5">
+<div class="bg-gray-100 text-gray-800 font-sans my-2">
     <!-- Header -->
     <div class="bg-pink-500 text-white text-center py-4">
         <h1 class="text-xl font-bold">Đánh giá & Nhận xét - Sản phẩm Hoa</h1>

@@ -20,7 +20,10 @@
                 <label class="block font-medium">Email</label>
                 <input type="email" name="email" value="{{ old('email', auth()->user()->email) }}" class="w-full px-4 py-2 border rounded-lg">
             </div>
-
+            <div class="mb-3">
+                <label class="block font-medium">Địa chỉ</label>
+                <input type="text" name="city" value="{{ old('diachi', auth()->user()->diachi) }}" class="w-full px-4 py-2 border rounded-lg">
+            </div>
             <div class="mb-3">
                 <label class="block font-medium">Thành phố</label>
                 <input type="text" name="city" value="{{ old('thanhpho', auth()->user()->thanhpho) }}" class="w-full px-4 py-2 border rounded-lg">

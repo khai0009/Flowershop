@@ -13,13 +13,12 @@ class CartController extends Controller
     protected function getOrCreateCheck()
 {
     $Check = Check::where('user_id', Auth::id())
-        ->where('Thanhtoan', 0)
+        ->where('Dathang', 0)
         ->first();
 
     if (!$Check) {
         $Check = Check::create([
             'user_id' => Auth::id(),
-            'Thanhtoan' => 0,
         ]);
     }
 
@@ -29,7 +28,7 @@ class CartController extends Controller
     {
         if (Auth::check()) {
             $Check = Check::where('user_id', Auth::id())
-                ->where('Thanhtoan', 0)
+                ->where('Dathang', 0)
                 ->first();
     
             if (!$Check) {
@@ -107,7 +106,7 @@ class CartController extends Controller
     public function updateQuantity(Request $request)
     {   
         $Check = Check::where('user_id', Auth::id())
-        ->where('Thanhtoan', 0)
+        ->where('Dathang', 0)
         ->first();
 
     if (!$Check) {
@@ -186,28 +185,31 @@ class CartController extends Controller
                 
                 
     $user = Auth::user();
-  
     $cart = cart::where('user_id', $user->id)->where('cart_id', $Check->Mahd)
         ->get();
+        $errors = [];  
         foreach ($cart as $cartItem) {
             $product = Product::find($cartItem->product_id);
-           
+            
             if ($product->soluong < $cartItem->quantilylocal) {
-                return redirect()->route('cart')->with('error', 'Số lượng sản phẩm ' . $product->name . ' không đủ hoặc không khả dụng. Vui lòng kiểm tra lại giỏ hàng của bạn.');
+                $errors[] = 'Số lượng sản phẩm "' . $product->tenhoa . '" không đủ hoặc không khả dụng.';
+                
             }
         }
-    
+        if (!empty($errors)) {
+            return redirect()->back()->with('errors', $errors); // Lưu errors luôn là một mảng
+        }
     $totalPrice = $cart->sum(fn($item) => $item->price * $item->quantilylocal);
 
-        
+    
     // Xác định địa chỉ giao hàng đầy đủ
     
     $checkoutAddress = match ($request->input('deliveryMethod')) {
-        'tại nhà' => $user->phuongxa . ', ' . $user->quanhuyen . ', ' . $user->selectedCity,
+        'tại nhà' => $user->diachi . ', '.$user->phuongxa . ', ' . $user->quanhuyen . ', ' . $user->thanhpho,
         'tại cửa hàng' => 'Phường MNL, Quận XYZ, TP.HCM',
         default =>$request->input('address') .','. $request->input('ward') . ', ' . $request->input('selectedDistrict') . ', ' . $request->input('selectedCity')
     };
-   
+
     if ($request->input('paymentMethod') === 'chuyển khoản') {
         return $this->qr($totalPrice, $Check->Mahd);
     }
@@ -216,18 +218,15 @@ class CartController extends Controller
             ->where('user_id', $user->id)
             ->where('Thanhtoan',0)
             ->update([
-                'Thanhtoan' => 1, // 0: chưa thanh toán, 1: đã thanh toán
+                'Dathang' => 1,
+                'Status' => "Đang chờ xét", 
                 'Tongcong' => $totalPrice,
                 'Pttt' => $request->input('paymentMethod'),
                 'Diachi' => $checkoutAddress,
                 'Ngaygiao' => Carbon::parse($request->input('deliveryTime')),
                 'updated_at' => now(), // Cập nhật updated_at
             ]);
-        foreach ($cart as $cartItem) {
-            $product = Product::find($cartItem->product_id);
-            $product->soluong -= $cartItem->quantilylocal;
-            $product->save();
-        }
+
     }
 
  

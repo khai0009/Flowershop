@@ -56,7 +56,7 @@
 <div class="pt-4 flex items-center justify-between">
     <span class="text-xl font-semibold">Tổng: <span class="text-pink-600"> @include('partials/cart_sum')</span></span>
     <button type="submit" class="bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition-colors">
-        Thanh toán
+        Đặt hàng
     </button>
 </div>
 </form>

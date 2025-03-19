@@ -7,6 +7,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+
+Route::get('/order-history', [OrderController::class, 'index'])->name('order.history');
 
 
 Route::get('/profile', [UserController::class, 'show'])->name('profile');
@@ -68,5 +71,10 @@ Route::prefix('Admin')->group(function () {
 Route::prefix('invoices')->group(function () {
     Route::get('/', [InvoiceController::class, 'index'])->name('invoices.index');
     Route::get('{mahd}', [InvoiceController::class, 'show'])->name('invoices.show');
+    Route::get('/{id}/edit-status', [InvoiceController::class, 'editStatus'])->name('invoices.editStatus');
+Route::post('/{id}/update-status', [InvoiceController::class, 'updateStatus'])->name('invoices.updateStatus');
+Route::get('/payment/{id}', [InvoiceController::class, 'editPayment'])->name('invoices.editPayment');
+Route::post('/payment/{id}', [InvoiceController::class, 'updatePayment'])->name('invoices.updatePayment');
+
 });
 ?>

@@ -18,7 +18,7 @@ class CartComposer
             // 1. Lấy danh sách Mahd (user ID) có Thanhtoan = 0
             $checks = DB::table('checks')
                 ->where('user_id',$userId)
-                ->where('Thanhtoan', 0)
+                ->where('Dathang', 0)
                 ->pluck('Mahd'); // Lấy danh sách Mahd
 
             if ($checks->isNotEmpty()) {

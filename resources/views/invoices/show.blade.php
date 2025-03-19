@@ -27,7 +27,7 @@
                         <p class="text-gray-600">Ngày giao: <span class="font-semibold">{{ $check->Ngaygiao }}</span></p>
                     </div>
                     <div>
-                        <p class="text-gray-600">Tổng cộng: <span class="font-semibold">{{ $check->Tongcong }}</span></p>
+                        <p class="text-gray-600">Tổng cộng: <span class="font-semibold">{{number_format($check->Tongcong  , 0, ',', '.') . ' VND'}}</span></p>
                         <p class="text-gray-600">Phương thức thanh toán: <span class="font-semibold">{{ $check->Pttt }}</span></p>
                         <p class="text-gray-600">Ngày tạo: <span class="font-semibold">{{ $check->created_at }}</span></p>
                     </div>
@@ -54,13 +54,13 @@
                                         <div class="text-sm font-medium text-gray-900">{{ $cart->product->tenhoa ?? 'N/A' }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ $cart->price }}</div>
+                                        <div class="text-sm text-gray-900">{{ number_format($cart->price  , 0, ',', '.') . ' VND'}}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">{{ $cart->quantilylocal }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{ $cart->price * $cart->quantilylocal }}</div>
+                                        <div class="text-sm text-gray-900">{{ number_format($cart->price * $cart->quantilylocal  , 0, ',', '.') . ' VND'}}</div>
                                     </td>
                                 </tr>
                             @empty

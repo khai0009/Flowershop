@@ -18,15 +18,15 @@
 <div class="bg-[#191919] min-h-screen font-sans">
 
     <section id="second" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#88BFB5]">
-    <iframe src="{{route('Admin.index')}}" width="1100" height="800"></iframe>
+    <iframe src="{{route('Admin.index')}}" width="1600" height="830"></iframe>
     </section>
 
     <section id="third" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#F2E527]">
-    <iframe src="{{route('invoices.index')}}" width="1100" height="800"></iframe>
+    <iframe src="{{route('invoices.index')}}" width="1600" height="830"></iframe>
     </section>
 
     <section id="fourth" class="absolute top-0 h-screen w-0 opacity-0 transition-all ease-in duration-500 flex justify-center items-center bg-[#D2A9D9]">
-    <iframe src="{{route('users.index')}}" width="1100" height="800"></iframe>
+    <iframe src="{{route('users.index')}}" width="1600" height="830"></iframe>
     </section>
 </div>
 

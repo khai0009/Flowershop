@@ -4,6 +4,42 @@
 
 @section('content')
     <div class="flex justify-center p-1">
+    @if (is_array(session('errors')))
+    <div id="alert-error" class="alert-error">
+        <ul>
+            @foreach (session('errors') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<style>
+    .alert-error {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #dc3545; /* Màu đỏ */
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        font-weight: bold;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+    }
+</style>
+
+<script>
+    setTimeout(() => {
+        let alertBox = document.getElementById('alert-error');
+        if (alertBox) {
+            alertBox.style.opacity = '0'; 
+            setTimeout(() => alertBox.remove(), 500);
+        }
+    }, 3000); // 3 giây sau tự ẩn
+</script>
     <div class="h-full p-4 w-full">
         <h1 class="text-3xl font-bold mb-6 text-pink-600 z-1">Giỏ hàng</h1>
         <a href="/" class="bg-pink-200 hover:bg-pink-300 text-pink-700 px-4 py-2 rounded-md inline-block mb-5">
@@ -31,9 +67,9 @@
                         <input type="number" name="quantilylocal" value="{{ $item->quantilylocal }}" class="w-16 border rounded p-2 border-pink-300 focus:ring-pink-500 mr-2" min="1">
                         <button type="submit" class="hidden"></button>
                     </form>
-                    <span class="text-gray-600">x {{ $item->product->gia }}</span>
+                    <span class="text-gray-600">x {{ number_format($item->product->gia, 0, ',', '.') . ' VND'}}</span>
                 </div>
-                <p class="mt-2 font-semibold text-pink-700">{{ $item->product->gia * $item->quantilylocal }} VNĐ</p>
+                <p class="mt-2 font-semibold text-pink-700"> {{ number_format($item->product->gia * $item->quantilylocal , 0, ',', '.') . ' VND'}}</p>
             </div>
 
             <form action="{{ route('remove.from.cart') }}" method="POST">
